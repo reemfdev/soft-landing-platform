@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import {
   PlusIcon,
@@ -32,54 +32,38 @@ export const Licenses: React.FC = () => {
   });
   const [newDocumentName, setNewDocumentName] = useState('');
   const [licenseErrors, setLicenseErrors] = useState<Record<string, string>>({});
-  const [licenses, setLicenses] = useState<License[]>([
-  {
-    id: '1',
-    name: 'Commercial Trade License',
-    type: 'commercial',
-    requiredFor: ['commercial', 'real_estate'],
-    status: 'active',
-    description: 'Basic trade license for commercial activities.',
-    documents: ['Passport Copy', 'Emirates ID']
-  },
-  {
-    id: '2',
-    name: 'Industrial Operating Permit',
-    type: 'industrial',
-    requiredFor: ['industrial'],
-    status: 'active',
-    description:
-    'Permit required for manufacturing and industrial operations.',
-    documents: ['Factory Plan', 'Environmental Clearance']
-  },
-  {
-    id: '3',
-    name: 'Tech Innovation Hub License',
-    type: 'real_estate',
-    requiredFor: ['real_estate', 'startup'],
-    status: 'active',
-    description: 'Special license for tech startups in innovation hubs.',
-    documents: ['Business Plan', 'Founder CV']
-  },
-  {
-    id: '4',
-    name: 'E-Commerce Permit',
-    type: 'startup',
-    requiredFor: ['commercial', 'startup'],
-    status: 'inactive',
-    description: 'Required for selling goods online.',
-    documents: ['Website Domain Proof', 'Bank Statement']
-  },
-  {
-    id: '5',
-    name: 'Food Safety Certificate',
-    type: 'commercial',
-    requiredFor: ['commercial'],
-    status: 'active',
-    description: 'Mandatory for food-related businesses.',
-    documents: ['Health Certificates', 'Premises Layout']
-  }]
-  );
+  const [licenses, setLicenses] = useState<License[]>([]);
+  
+// أضف useEffect لجلب البيانات
+useEffect(() => {
+  fetchLicenses();
+}, []);
+
+const fetchLicenses = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:3000/auth/licenses', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await response.json();
+    if (data.success) {
+      setLicenses(
+        (data.licenses || []).map((l: any) => ({
+          id: String(l.id),
+          name: l.name_en || '',
+          type: l.type || 'commercial',
+          status: l.status === 'active' ? 'active' : 'inactive',
+          description: l.description || '',
+          requiredFor: l.requiredFor || [],
+          documents: l.documents || []
+        }))
+      );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   const companyTypes = ['startup', 'industrial', 'real_estate', 'commercial'];
 
   const handleOpenModal = (license?: License) => {
@@ -109,11 +93,22 @@ export const Licenses: React.FC = () => {
     setLicenseErrors({});
     setIsModalOpen(true);
   };
-  const handleDelete = (id: string) => {
-    if (confirm(t('deleteConfirmation' as any))) {
-      setLicenses(licenses.filter((l) => l.id !== id));
+  const handleDelete = async (id: string) => {
+  if (!confirm(t('deleteConfirmation' as any))) return;
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:3000/auth/licenses/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await response.json();
+    if (data.success) {
+      setLicenses((prev) => prev.filter((l) => l.id !== id));
     }
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const toggleRequiredFor = (type: string) => {
     setLicenseForm((prev) => ({
@@ -164,48 +159,51 @@ export const Licenses: React.FC = () => {
     }));
   };
 
-  const handleLicenseSave = () => {
-    const errors: Record<string, string> = {};
-    if (!licenseForm.name.trim()) errors.name = t('fieldRequired' as any);
-    if (!licenseForm.description.trim()) errors.description = t('fieldRequired' as any);
-    if (!licenseForm.requiredFor.length) errors.requiredFor = t('fieldRequired' as any);
-    if (!licenseForm.selectedDocuments.length) errors.documents = t('fieldRequired' as any);
-    if (Object.keys(errors).length > 0) {
-      setLicenseErrors(errors);
-      return;
-    }
+  const handleLicenseSave = async () => {
+  const errors: Record<string, string> = {};
+  if (!licenseForm.name.trim()) errors.name = t('fieldRequired' as any);
+  if (!licenseForm.description.trim()) errors.description = t('fieldRequired' as any);
+  if (!licenseForm.requiredFor.length) errors.requiredFor = t('fieldRequired' as any);
+  if (!licenseForm.selectedDocuments.length) errors.documents = t('fieldRequired' as any);
+  if (Object.keys(errors).length > 0) { setLicenseErrors(errors); return; }
 
-    const savedLicense = {
-      name: licenseForm.name,
-      type: licenseForm.type,
-      requiredFor: licenseForm.requiredFor,
-      status: licenseForm.status,
-      description: licenseForm.description,
-      documents: licenseForm.selectedDocuments
-    };
-
-    if (editingLicense) {
-      setLicenses((prev) =>
-        prev.map((license) =>
-          license.id === editingLicense.id ? { ...license, ...savedLicense } : license
-        )
-      );
-      alert(t('licenseSaved' as any));
-    } else {
-      setLicenses((prev) => [
-        ...prev,
-        {
-          id: String(prev.length + 1),
-          ...savedLicense
-        }
-      ]);
-      alert(t('licenseSaved' as any));
-    }
-
-    setIsModalOpen(false);
-    setEditingLicense(null);
-    setLicenseErrors({});
+  const token = localStorage.getItem('token');
+  const payload = {
+    name: licenseForm.name,
+    type: licenseForm.type,
+    status: licenseForm.status,
+    description: licenseForm.description,
+    requiredFor: licenseForm.requiredFor,
+    documents: licenseForm.selectedDocuments
   };
+
+  try {
+    const url = editingLicense
+      ? `http://localhost:3000/auth/licenses/${editingLicense.id}`
+      : 'http://localhost:3000/auth/licenses';
+
+    const method = editingLicense ? 'PUT' : 'POST';
+
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      await fetchLicenses(); // تحديث القائمة
+      setIsModalOpen(false);
+      setEditingLicense(null);
+      setLicenseErrors({});
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <div className="space-y-8 pb-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

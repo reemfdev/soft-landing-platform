@@ -219,22 +219,6 @@ export const translations = {
     commercial: 'تجاري',
     real_estate: 'عقاري',
 
-    // Market Rules Page
-    addRule: 'إضافة قاعدة',
-    ruleName: 'اسم القاعدة',
-    ruleNamePlaceholder: 'مثال: متطلبات رأس مال الشركة الناشئة',
-    condition: 'الشرط',
-    action: 'الإجراء',
-    enableRule: 'تفعيل القاعدة',
-    ifCompanyTypeIs: 'إذا كان نوع الشركة',
-    thenRequire: 'ثم اطلب',
-    requirementPlaceholder: 'مثال: رأس مال أدنى 50,000 دولار',
-    fieldRequired: 'هذه الخانة مطلوبة',
-    ruleSaved: 'تم حفظ القاعدة بنجاح',
-    licenseSaved: 'تم حفظ الترخيص بنجاح',
-    deleteConfirmation: 'هل أنت متأكد أنك تريد حذف هذا العنصر؟',
-    licenseNamePlaceholder: 'مثال: ترخيص تجاري',
-    descriptionPlaceholder: 'وصف مختصر عن الترخيص...',
 
     // Users Page
     name: 'الاسم',

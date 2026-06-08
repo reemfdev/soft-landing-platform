@@ -20,6 +20,8 @@ interface Company {
   location: string;
   address: string;
   sector: string;
+  sectorNameEn: string;  // ← أضف هذا
+  sectorNameAr: string;  // ← أضف هذا
   email: string;
   representativeName: string;
   phoneNumber: string;
@@ -37,6 +39,8 @@ const initialFormState: Omit<Company, 'logo'> = {
   location: '',
   address: '',
   sector: '',
+  sectorNameEn: '',  // ← أضف هذا
+  sectorNameAr: '',  // ← أضف هذا
   email: '',
   representativeName: '',
   phoneNumber: '',
@@ -123,6 +127,9 @@ export const Companies: React.FC = () => {
           address: company.country || '',
 
           sector: String(company.sector_id || ''),
+
+          sectorNameEn: company.sector_name_en || String(company.sector_id || ''),
+          sectorNameAr: company.sector_name_ar || String(company.sector_id || ''),
 
           email: company.email || '',
 
@@ -547,7 +554,7 @@ export const Companies: React.FC = () => {
                     {t('sector')}
                   </p>
                   <p className="mt-2 text-sm font-medium text-navy dark:text-cream-dark">
-                    {viewCompany.sector}
+                  {language === 'ar' ? viewCompany.sectorNameAr : viewCompany.sectorNameEn}
                   </p>
                 </div>
               </div>

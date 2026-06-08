@@ -29,7 +29,6 @@ import { Companies } from './pages/Companies'
 import { Requests } from './pages/Requests'
 import { Stages } from './pages/Stages'
 import { Licenses } from './pages/Licenses'
-import { MarketRules } from './pages/MarketRules'
 import { Notifications } from './pages/Notifications'
 import { Settings } from './pages/Settings'
 import { Layout } from './components/Layout'
@@ -171,7 +170,6 @@ function AppContent() {
           <Route path="requests" element={<Requests />} />
           <Route path="stages" element={<Stages />} />
           <Route path="licenses" element={<Licenses />} />
-          <Route path="market-rules" element={<MarketRules />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="settings" element={<Settings />} />
           </Route>

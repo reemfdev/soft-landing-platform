@@ -60,11 +60,6 @@ export const Layout: React.FC = () => {
   label: 'licenses'
 },
 {
-  path: '/admin/market-rules',
-  icon: ScaleIcon,
-  label: 'marketRules'
-},
-{
   path: '/admin/notifications',
   icon: BellIcon,
   label: 'notifications'

@@ -288,4 +288,38 @@ CREATE TABLE IF NOT EXISTS notifications (
 )
 `);
 
+// ─── LICENSES TABLES ───────────────────────────────
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS licenses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_en TEXT NOT NULL,
+    name_ar TEXT,
+    description TEXT,
+    type TEXT,
+    status TEXT DEFAULT 'active',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS license_sectors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    license_id INTEGER NOT NULL,
+    sector_name TEXT NOT NULL,
+    FOREIGN KEY (license_id) REFERENCES licenses(id) ON DELETE CASCADE
+  )
+`);
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS license_documents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    license_id INTEGER NOT NULL,
+    document_name_en TEXT NOT NULL,
+    document_name_ar TEXT,
+    is_required INTEGER DEFAULT 1,
+    FOREIGN KEY (license_id) REFERENCES licenses(id) ON DELETE CASCADE
+  )
+`);
+
 module.exports = db;

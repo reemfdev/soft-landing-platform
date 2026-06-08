@@ -967,9 +967,13 @@ router.get(
 
       db.all(
         `
-        SELECT *
+        SELECT 
+          companies.*,
+          sectors.name_en AS sector_name_en,
+          sectors.name_ar AS sector_name_ar
         FROM companies
-        ORDER BY id DESC
+        LEFT JOIN sectors ON companies.sector_id = sectors.id
+        ORDER BY companies.id DESC
         `,
         [],
 
@@ -1104,6 +1108,158 @@ router.put(
 
     }
 
+  }
+);
+
+// ================ GET ALL LICENSES ================
+router.get(
+  "/licenses",
+  authMiddleware,
+  (req, res) => {
+    db.all(
+      `SELECT * FROM licenses ORDER BY id DESC`,
+      [],
+      (err, licenses) => {
+        if (err) return res.status(500).json({ success: false, message: "Error fetching licenses" });
+
+        if (!licenses.length) return res.json({ success: true, licenses: [] });
+
+        // جلب القطاعات والمستندات لكل ترخيص
+        let pending = licenses.length;
+        const results = [];
+
+        licenses.forEach((license) => {
+          db.all(
+            `SELECT sector_name FROM license_sectors WHERE license_id = ?`,
+            [license.id],
+            (err, sectors) => {
+              db.all(
+                `SELECT * FROM license_documents WHERE license_id = ?`,
+                [license.id],
+                (err, documents) => {
+                  results.push({
+                    ...license,
+                    requiredFor: (sectors || []).map((s) => s.sector_name),
+                    documents: (documents || []).map((d) => d.document_name_en)
+                  });
+                  pending--;
+                  if (pending === 0) {
+                    results.sort((a, b) => b.id - a.id);
+                    res.json({ success: true, licenses: results });
+                  }
+                }
+              );
+            }
+          );
+        });
+      }
+    );
+  }
+);
+
+// ================ CREATE LICENSE ================
+router.post(
+  "/licenses",
+  authMiddleware,
+  (req, res) => {
+    const { name, description, type, status, requiredFor, documents } = req.body;
+
+    if (!name) return res.status(400).json({ success: false, message: "Name is required" });
+
+    db.run(
+      `INSERT INTO licenses (name_en, description, type, status) VALUES (?, ?, ?, ?)`,
+      [name, description || "", type || "commercial", status || "active"],
+      function (err) {
+        if (err) return res.status(500).json({ success: false, message: "Error creating license" });
+
+        const licenseId = this.lastID;
+
+        // إدخال القطاعات
+        if (requiredFor && requiredFor.length) {
+          requiredFor.forEach((sector) => {
+            db.run(
+              `INSERT INTO license_sectors (license_id, sector_name) VALUES (?, ?)`,
+              [licenseId, sector]
+            );
+          });
+        }
+
+        // إدخال المستندات
+        if (documents && documents.length) {
+          documents.forEach((doc) => {
+            db.run(
+              `INSERT INTO license_documents (license_id, document_name_en) VALUES (?, ?)`,
+              [licenseId, doc]
+            );
+          });
+        }
+
+        res.status(201).json({ success: true, message: "License created ✅", license_id: licenseId });
+      }
+    );
+  }
+);
+
+// ================ UPDATE LICENSE ================
+router.put(
+  "/licenses/:id",
+  authMiddleware,
+  (req, res) => {
+    const { id } = req.params;
+    const { name, description, type, status, requiredFor, documents } = req.body;
+
+    db.run(
+      `UPDATE licenses SET name_en = ?, description = ?, type = ?, status = ? WHERE id = ?`,
+      [name, description, type, status, id],
+      function (err) {
+        if (err) return res.status(500).json({ success: false, message: "Error updating license" });
+
+        // حذف القديم وإدخال الجديد
+        db.run(`DELETE FROM license_sectors WHERE license_id = ?`, [id], () => {
+          if (requiredFor && requiredFor.length) {
+            requiredFor.forEach((sector) => {
+              db.run(
+                `INSERT INTO license_sectors (license_id, sector_name) VALUES (?, ?)`,
+                [id, sector]
+              );
+            });
+          }
+        });
+
+        db.run(`DELETE FROM license_documents WHERE license_id = ?`, [id], () => {
+          if (documents && documents.length) {
+            documents.forEach((doc) => {
+              db.run(
+                `INSERT INTO license_documents (license_id, document_name_en) VALUES (?, ?)`,
+                [id, doc]
+              );
+            });
+          }
+        });
+
+        res.json({ success: true, message: "License updated ✅" });
+      }
+    );
+  }
+);
+
+// ================ DELETE LICENSE ================
+router.delete(
+  "/licenses/:id",
+  authMiddleware,
+  (req, res) => {
+    const { id } = req.params;
+
+    db.run(`DELETE FROM license_sectors WHERE license_id = ?`, [id]);
+    db.run(`DELETE FROM license_documents WHERE license_id = ?`, [id]);
+    db.run(
+      `DELETE FROM licenses WHERE id = ?`,
+      [id],
+      function (err) {
+        if (err) return res.status(500).json({ success: false, message: "Error deleting license" });
+        res.json({ success: true, message: "License deleted ✅" });
+      }
+    );
   }
 );
 
