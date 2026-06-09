@@ -1,6 +1,7 @@
 export const translations = {
   en: {
     // Menu
+    welcomeMessage: "Welcome back, Admin. Here's what's happening today.",
     dashboard: 'Dashboard',
     users: 'Users',
     companies: 'Companies',
@@ -15,6 +16,7 @@ export const translations = {
     marketRules: 'Market Rules',
     notifications: 'Notifications',
     settings: 'Settings',
+    logout: 'Logout',
 
     // Topbar
     searchPlaceholder: 'Search...',
@@ -43,6 +45,7 @@ export const translations = {
     unread: 'Unread',
     read: 'Read',
     markAllAsRead: 'Mark all as read',
+    SubtitleNotifications: 'Manage and view all your system alerts and updates.',
 
     // Licenses Page
     addLicense: 'Add License',
@@ -60,23 +63,8 @@ export const translations = {
     realEstate: 'Real Estate',
     commercial: 'Commercial',
     real_estate: 'Real Estate',
+    SubtitleLicenses: 'Manage required licenses and permits for different company types.',
 
-    // Market Rules Page
-    addRule: 'Add Rule',
-    ruleName: 'Rule Name',
-    ruleNamePlaceholder: 'e.g. Startup Capital Requirement',
-    condition: 'Condition',
-    action: 'Action',
-    enableRule: 'Enable Rule',
-    ifCompanyTypeIs: 'If company type is',
-    thenRequire: 'then require',
-    requirementPlaceholder: 'e.g. Minimum capital of $50,000',
-    fieldRequired: 'This field is required',
-    ruleSaved: 'Rule saved successfully',
-    licenseSaved: 'License saved successfully',
-    deleteConfirmation: 'Are you sure you want to delete this item?',
-    licenseNamePlaceholder: 'e.g. Commercial Trade License',
-    descriptionPlaceholder: 'Brief description of the license...',
 
     // Users Page
     name: 'Name',
@@ -97,6 +85,7 @@ export const translations = {
     passwordMismatch: 'Passwords do not match',
     disableUser: 'Disable User',
     enableUser: 'Enable User',
+    ExplanatoryMessage: 'Manage system users, roles, and access permissions.',
 
     // Companies Page
     registrationDate: 'Registration Date',
@@ -105,12 +94,15 @@ export const translations = {
     sector: 'Sector',
     representativeName: 'Company Representative Name',
     relatedInfo: 'Related info',
+    SubtitleCompanies: 'View and manage registered companies on the platform.',
 
     // Requests Page
     assignedTo: 'Assigned To',
     date: 'Date',
     assign: 'Assign',
     unassigned: 'Unassigned',
+    type: 'Type',
+    SubtitleRequests: 'Manage and process company requests and applications.',
 
     // Stages Page
     addStage: 'Add Stage',
@@ -119,6 +111,8 @@ export const translations = {
     dragToReorder: 'Drag to reorder',
     stageCreatedSuccess: 'Stage created successfully',
     stageUpdatedSuccess: 'Stage updated successfully',
+    deleteConfirmation: "Are you sure you want to delete this item?",
+    SubtitleStages: 'Manage company onboarding stages and progression through the process.',
 
     // Settings Page
     profileSettings: 'Profile Settings',
@@ -134,6 +128,9 @@ export const translations = {
     security: 'Security',
     changePassword: 'Change Password',
     logoutAllDevices: 'Logout from all devices',
+    fieldRequired: 'This field is required',
+    SubtitleSettings: 'Manage your account preferences and system configuration.',
+
 
     // Statuses
     submitted: 'Submitted',
@@ -173,12 +170,14 @@ export const translations = {
     marketRules: 'قواعد السوق',
     notifications: 'الإشعارات',
     settings: 'الإعدادات',
+    logout: 'تسجيل الخروج',
 
     // Topbar
     searchPlaceholder: 'بحث...',
     adminName: 'مدير النظام',
 
     // Dashboard
+    welcomeMessage: "مرحباً بعودتك، مدير النظام. إليك ملخص ما يحدث اليوم.",
     totalCompanies: 'إجمالي الشركات',
     totalRequests: 'إجمالي الطلبات',
     pendingRequests: 'طلبات قيد الانتظار',
@@ -201,6 +200,7 @@ export const translations = {
     unread: 'غير مقروء',
     read: 'مقروء',
     markAllAsRead: 'تحديد الكل كمقروء',
+    SubtitleNotifications: 'إدارة وعرض جميع تنبيهات النظام والتحديثات.',
 
     // Licenses Page
     addLicense: 'إضافة ترخيص',
@@ -218,6 +218,7 @@ export const translations = {
     realEstate: 'عقاري',
     commercial: 'تجاري',
     real_estate: 'عقاري',
+    SubtitleLicenses: 'إدارة التراخيص والتصاريح المطلوبة لأنواع الشركات المختلفة.',
 
 
     // Users Page
@@ -239,6 +240,7 @@ export const translations = {
     passwordMismatch: 'كلمتا المرور غير متطابقتين',
     disableUser: 'تعطيل المستخدم',
     enableUser: 'تفعيل المستخدم',
+    ExplanatoryMessage: 'إدارة مستخدمي النظام، الأدوار، وأذونات الوصول.',
 
     // Companies Page
     registrationDate: 'تاريخ التسجيل',
@@ -251,12 +253,15 @@ export const translations = {
     sector: 'القطاع',
     representativeName: 'اسم ممثل الشركة',
     relatedInfo: 'معلومات ذات صلة',
+    SubtitleCompanies: 'عرض وإدارة الشركات المسجلة على المنصة.',
 
     // Requests Page
     assignedTo: 'معين إلى',
     date: 'التاريخ',
     assign: 'تعيين',
     unassigned: 'غير معين',
+    type: 'النوع',
+    SubtitleRequests: 'إدارة ومعالجة طلبات الشركات والتطبيقات.',
 
     // Stages Page
     addStage: 'إضافة مرحلة',
@@ -265,6 +270,8 @@ export const translations = {
     dragToReorder: 'اسحب لإعادة الترتيب',
     stageCreatedSuccess: 'تم إنشاء المرحلة بنجاح',
     stageUpdatedSuccess: 'تم تحديث المرحلة بنجاح',
+    deleteConfirmation: "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+    SubtitleStages: 'إدارة مراحل انضمام الشركات وتقدمها في العملية.',
 
     // Settings Page
     profileSettings: 'إعدادات الملف الشخصي',
@@ -280,6 +287,9 @@ export const translations = {
     security: 'الأمان',
     changePassword: 'تغيير كلمة المرور',
     logoutAllDevices: 'تسجيل الخروج من جميع الأجهزة',
+    fieldRequired: 'هذا الحقل مطلوب',
+    SubtitleSettings: 'إدارة تفضيلات حسابك وتكوين النظام.',
+
 
     // Statuses
     submitted: 'مقدم',

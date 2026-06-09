@@ -375,7 +375,7 @@ export const Companies: React.FC = () => {
             {t('companies')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            View and manage registered companies on the platform.
+            {t('SubtitleCompanies')}
           </p>
         </div>
 

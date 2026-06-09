@@ -209,7 +209,7 @@ export const Settings: React.FC = () => {
           {t('settings')}
         </h1>
         <p className="text-gray-500 dark:text-gray-400">
-          Manage your account preferences and system configuration.
+          {t('SubtitleSettings')}
         </p>
       </div>
 

@@ -174,7 +174,7 @@ export const Dashboard: React.FC = () => {
             {t('dashboard')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Welcome back, Admin. Here's what's happening today.
+            {t('welcomeMessage')}
           </p>
         </div>
       </div>

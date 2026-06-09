@@ -116,7 +116,7 @@ export const Stages: React.FC = () => {
             {t('stages')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Manage the onboarding pipeline and company progression stages.
+            {t('SubtitleStages')}
           </p>
           {successMessage ? (
             <div className="mt-3 rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-800/30 dark:bg-green-900/20 dark:text-green-200">

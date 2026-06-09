@@ -174,7 +174,7 @@ export const Requests: React.FC = () => {
             {t('requests')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Manage and process company requests and applications.
+            {t('SubtitleRequests')}
           </p>
         </div>
 

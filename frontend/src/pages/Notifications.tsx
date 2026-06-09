@@ -185,7 +185,7 @@ export const Notifications: React.FC = () => {
             {t('notifications')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Manage and view all your system alerts and updates.
+            {t('SubtitleNotifications')}
           </p>
         </div>
         <button

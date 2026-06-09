@@ -212,7 +212,7 @@ const fetchLicenses = async () => {
             {t('licenses')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Manage required licenses and permits for different company types.
+            {t('SubtitleLicenses')}
           </p>
         </div>
         <button

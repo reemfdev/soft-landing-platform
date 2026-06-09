@@ -460,7 +460,7 @@ setUsers(
             {t('users')}
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Manage system users, roles, and access permissions.
+            {t('ExplanatoryMessage')}
           </p>
           {successMessage ? (
             <div className="mt-3 rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-800/30 dark:bg-green-900/20 dark:text-green-200">

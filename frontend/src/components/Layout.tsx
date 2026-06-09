@@ -11,11 +11,11 @@ import {
   ScaleIcon,
   BellIcon,
   SettingsIcon,
-  SearchIcon,
   SunIcon,
   MoonIcon,
-  GlobeIcon } from
-'lucide-react';
+  GlobeIcon,
+  LogOutIcon
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 export const Layout: React.FC = () => {
   const { language, theme, toggleLanguage, toggleTheme, t } = useAppContext();
@@ -28,52 +28,61 @@ export const Layout: React.FC = () => {
     { id: 4, isRead: true }
   ]);
   const unreadCount = notifications.filter(n => !n.isRead).length;
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
   const menuItems = [
- {
-  path: '/admin',
-  icon: LayoutDashboardIcon,
-  label: 'dashboard'
-},
-{
-  path: '/admin/users',
-  icon: UsersIcon,
-  label: 'users'
-},
-{
-  path: '/admin/companies',
-  icon: BuildingIcon,
-  label: 'companies'
-},
-{
-  path: '/admin/requests',
-  icon: FileTextIcon,
-  label: 'requests'
-},
-{
-  path: '/admin/stages',
-  icon: GitBranchIcon,
-  label: 'stages'
-},
-{
-  path: '/admin/licenses',
-  icon: ShieldCheckIcon,
-  label: 'licenses'
-},
-{
-  path: '/admin/notifications',
-  icon: BellIcon,
-  label: 'notifications'
-},
-{
-  path: '/admin/settings',
-  icon: SettingsIcon,
-  label: 'settings'
-}] as
-  const;
+    {
+      path: '/admin',
+      icon: LayoutDashboardIcon,
+      label: 'dashboard'
+    },
+    {
+      path: '/admin/users',
+      icon: UsersIcon,
+      label: 'users'
+    },
+    {
+      path: '/admin/companies',
+      icon: BuildingIcon,
+      label: 'companies'
+    },
+    {
+      path: '/admin/requests',
+      icon: FileTextIcon,
+      label: 'requests'
+    },
+    {
+      path: '/admin/stages',
+      icon: GitBranchIcon,
+      label: 'stages'
+    },
+    {
+      path: '/admin/licenses',
+      icon: ShieldCheckIcon,
+      label: 'licenses'
+    },
+    {
+      path: '/admin/notifications',
+      icon: BellIcon,
+      label: 'notifications'
+    },
+    {
+      path: '/admin/settings',
+      icon: SettingsIcon,
+      label: 'settings'
+    }
+  ] as const;
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-cream dark:bg-navy-dark transition-colors duration-300">
-      {/* Sidebar */}
-      <aside className="w-64 bg-navy dark:bg-navy-card text-white flex flex-col flex-shrink-0 shadow-xl z-20 transition-colors duration-300">
+      <div
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+      className="flex h-screen w-full overflow-hidden bg-cream dark:bg-navy-dark transition-colors duration-300"
+      >
+      <aside
+      className="w-64 bg-navy dark:bg-navy-card text-white flex flex-col flex-shrink-0 shadow-xl z-20 transition-colors duration-300"
+      >
         <div className="p-6 flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-gold flex items-center justify-center font-bold text-navy">
             SL
@@ -89,42 +98,50 @@ export const Layout: React.FC = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive ? 'bg-navy-light dark:bg-navy text-gold' : 'text-gray-300 hover:bg-navy-light/50 dark:hover:bg-navy-light/30 hover:text-white'}`}>
-                
-                <Icon size={20} className={isActive ? 'text-gold' : ''} />
-                <span className="font-medium text-sm">{t(item.label)}</span>
-                {isActive &&
-                <motion.div
-                  layoutId="sidebar-active"
-                  className={`absolute w-1 h-8 bg-gold rounded-full ${language === 'ar' ? 'right-0' : 'left-0'}`}
-                  initial={false}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 30
-                  }} />
-
-                }
-              </NavLink>);
+                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+          isActive
+                ? 'bg-navy-light dark:bg-navy text-gold'
+                : 'text-gray-300 hover:bg-navy-light/50 dark:hover:bg-navy-light/30 hover:text-white'
+      }`}
+    >
+  <Icon size={20} className={isActive ? 'text-gold' : ''} />
+  <span className="font-medium text-sm">{t(item.label)}</span>
+  {isActive && (
+    <motion.div
+      layoutId="sidebar-active"
+      className="absolute inset-y-0 start-0 w-1 bg-gold rounded-full"
+      initial={false}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+    />
+  )}
+</NavLink>);
 
           })}
         </nav>
+
+        <div className="px-4 pb-6">
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-gray-300 hover:bg-navy-light/50 dark:hover:bg-navy-light/30 hover:text-white transition-all duration-200">
+            <LogOutIcon size={20} />
+            <span className="font-medium text-sm">{t('logout')}</span>
+          </button>
+        </div>
       </aside> 
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+
         {/* Top Navbar */}
         <header className="h-20 bg-white dark:bg-navy-card shadow-sm flex items-center justify-between px-8 z-10 transition-colors duration-300">
-          <div className="flex items-center bg-cream dark:bg-navy-dark rounded-xl px-4 py-2.5 w-96 border border-transparent focus-within:border-gold/50 transition-colors">
-            <SearchIcon size={18} className="text-gray-400" />
-            <input
-              type="text"
-              placeholder={t('searchPlaceholder')}
-              className="bg-transparent border-none outline-none px-3 w-full text-sm text-navy dark:text-cream-dark placeholder-gray-400" />
-            
-          </div>
+          <div className="w-96" />
 
-          <div className="flex items-center gap-6">
+          <div
+          className={`flex items-center gap-6 ${
+          language === 'ar' ? 'flex-row-reverse' : ''
+          }`}
+          >
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-2 text-sm font-medium text-navy dark:text-cream-dark hover:text-gold dark:hover:text-gold transition-colors">
@@ -159,7 +176,7 @@ export const Layout: React.FC = () => {
             <div className="h-8 w-px bg-gray-200 dark:bg-navy-light mx-2"></div>
 
             <div className="flex items-center gap-3">
-              <div className="text-right">
+              <div className={language === 'ar' ? 'text-right' : 'text-left'}>
                 <p className="text-sm font-semibold text-navy dark:text-cream-dark">
                   {t('adminName')}
                 </p>
