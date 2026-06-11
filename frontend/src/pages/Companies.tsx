@@ -117,10 +117,7 @@ export const Companies: React.FC = () => {
               ? 'pending'
               : 'suspended',
 
-          registrationDate: company.created_at
-            ? new Date(company.created_at)
-                .toLocaleDateString()
-            : '',
+          registrationDate: company.created_at || '',
 
           location: company.country || '',
 
@@ -290,6 +287,34 @@ export const Companies: React.FC = () => {
 
       default:
         return status;
+
+    }
+
+  };
+
+  const formatDate = (dateString: string): string => {
+
+    if (!dateString) return '';
+
+    try {
+
+      const date = new Date(dateString);
+
+      const locale = language === 'ar' ? 'ar-SA' : 'en-US';
+
+      return date.toLocaleDateString(locale, {
+
+        year: 'numeric',
+
+        month: 'numeric',
+
+        day: 'numeric'
+
+      });
+
+    } catch (error) {
+
+      return dateString;
 
     }
 
@@ -471,7 +496,7 @@ export const Companies: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <CalendarIcon size={14} />
-                  <span>{company.registrationDate}</span>
+                  <span dir="ltr">{formatDate(company.registrationDate)}</span>
                 </div>
               </div>
             </div>
@@ -588,7 +613,7 @@ export const Companies: React.FC = () => {
                     {t('relatedInfo')}
                   </p>
                   <p className="mt-2 text-sm font-medium text-navy dark:text-cream-dark">
-                    Type: {viewCompany.type} · Registered: {viewCompany.registrationDate}
+                    Type: {viewCompany.type} · Registered: <span dir="ltr">{formatDate(viewCompany.registrationDate)}</span>
                   </p>
                 </div>
               </div>

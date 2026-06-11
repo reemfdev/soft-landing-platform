@@ -328,10 +328,9 @@ export const Dashboard: React.FC = () => {
                     <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
                       {req.employee}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 flex items-center justify-center align-middle min-w-[140px]">
                       <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(req.status)}`}>
-                      
+                        className={`inline-flex items-center justify-center whitespace-nowrap h-7 px-3 rounded-full text-xs font-medium leading-none ${getStatusColor(req.status)}`}>
                         {t(req.status as any)}
                       </span>
                     </td>
@@ -373,7 +372,7 @@ export const Dashboard: React.FC = () => {
               return (
                 <div
                   key={notif.id}
-                  className="flex gap-4 p-4 hover:bg-gray-50 dark:hover:bg-navy-light/20 rounded-xl transition-colors cursor-pointer group">
+                  className="flex gap-4 p-4 rounded-xl">
                   
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${getNotificationIconColor(notif.type)}`}>
@@ -390,13 +389,6 @@ export const Dashboard: React.FC = () => {
                     <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
                       {notif.time}
                     </p>
-                  </div>
-                  <div className="flex items-center text-gray-300 dark:text-gray-600 group-hover:text-gold transition-colors">
-                    {isRtl ?
-                    <ChevronLeftIcon size={16} /> :
-
-                    <ChevronRightIcon size={16} />
-                    }
                   </div>
                 </div>);
 
