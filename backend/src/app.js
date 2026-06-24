@@ -1,11 +1,16 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-// NOTE: src/db.js (SQLite bootstrap) is no longer required here.
-// Schema creation/migration is now owned by Prisma (prisma/schema.prisma +
-// `npx prisma migrate` / `npx prisma db push`) against PostgreSQL.
-// db.js is left in place, unused, in case any one-off script still
-// references it directly — see migration report for removal guidance.
+
+// ← أضف هذا السطر هنا
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
+app.use(express.json());
+app.use(cors());
+
 app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
