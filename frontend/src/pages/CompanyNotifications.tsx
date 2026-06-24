@@ -18,7 +18,7 @@ useEffect(() => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications",
+        "https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ useEffect(() => {
 
       setNotifications(res.data.notifications || []);
       await axios.put(
-  "http://https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications/read",
+  "https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications/read",
   {},
   {
     headers: {

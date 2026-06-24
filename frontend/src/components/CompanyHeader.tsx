@@ -16,7 +16,7 @@ const handleLogout = async () => {
 try {
 
 await axios.post(
-"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/logout"
+"https://soft-landing-platform-production-0e16.up.railway.app//auth/logout"
 );
 
 } catch (err) {
@@ -45,7 +45,7 @@ useEffect(() => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications/unread-count",
+        "https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications/unread-count",
         {
           headers: {
             Authorization: `Bearer ${token}`,

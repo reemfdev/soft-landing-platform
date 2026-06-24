@@ -8,7 +8,7 @@ import {
   ChevronLeft, ChevronRight, X, ClipboardList
 } from 'lucide-react';
 
-const API = 'http://https://soft-landing-platform-production-0e16.up.railway.app/';
+const API = 'https://soft-landing-platform-production-0e16.up.railway.app/';
 const ITEMS_PER_PAGE = 10;
 
 export default function EmployeeRequests() {

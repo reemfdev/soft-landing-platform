@@ -20,7 +20,7 @@ const [showError, setShowError] = useState(false);
     const fetchTask = async () => {
       try {
         const response = await fetch(
-          `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/tasks/${id}`
+          `https://soft-landing-platform-production-0e16.up.railway.app//companies/tasks/${id}`
         );
 
         const data = await response.json();
@@ -285,7 +285,7 @@ if (
                     );
 
                     const response = await fetch(
-                      `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/tasks/${id}/upload`,
+                      `https://soft-landing-platform-production-0e16.up.railway.app//companies/tasks/${id}/upload`,
                       {
                         method: "POST",
                         headers: {
