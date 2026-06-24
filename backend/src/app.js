@@ -2,9 +2,16 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 
+// ← أضف هذا: إزالة الشخطات المكررة من أي طلب
+app.use((req, res, next) => {
+  req.url = req.url.replace(/\/+/g, '/');
+  next();
+});
+
 app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
+
 const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
 
