@@ -312,7 +312,7 @@ isLogin
 
 :
 
-"http://localhost:3000/auth/register-with-company";
+"`${import.meta.env.VITE_API_URL}/auth/register-with-company`";
 const body =
 
 isReset

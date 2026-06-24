@@ -291,7 +291,7 @@ return;
  // إنشاء حساب
 try {
 
-  const res = await fetch('http://localhost:3000/auth/register-with-company', {
+  const res = await fetch('`${import.meta.env.VITE_API_URL}/auth/register-with-company`', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
