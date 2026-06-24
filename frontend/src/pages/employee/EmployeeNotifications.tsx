@@ -8,7 +8,7 @@ import {
   CheckCircle, XCircle, AlertCircle, RefreshCw, ClipboardList
 } from 'lucide-react';
 
-const API = 'http://localhost:3000';
+const API = 'http://https://soft-landing-platform-production-0e16.up.railway.app/';
 type TabType = 'all' | 'unread' | 'REQUEST_APPROVED' | 'REQUEST_REJECTED' | 'RESUBMISSION_REQUESTED';
 
 interface Notification {

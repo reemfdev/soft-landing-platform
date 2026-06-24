@@ -45,7 +45,7 @@ const [showSuccess, setShowSuccess] = useState(false);
 const token = localStorage.getItem("token");
 
 const response = await axios.get(
-`http://localhost:3000/companies/${companyId}`,
+`http://https://soft-landing-platform-production-0e16.up.railway.app//companies/${companyId}`,
 {
     headers: {
         Authorization: `Bearer ${token}`
@@ -186,7 +186,7 @@ setCompanyData({
 console.log(user);
 console.log(user.company_id);
 await axios.put(
-  `http://localhost:3000/companies/${user.company_id}`,
+  `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/${user.company_id}`,
 {
   name: companyData.companyName,
   manager_name: companyData.managerName,

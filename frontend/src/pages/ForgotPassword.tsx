@@ -33,7 +33,7 @@ try {
 
 const res =
 await fetch(
-"http://localhost:3000/auth/forgot-password",
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/forgot-password",
 {
 
 method:

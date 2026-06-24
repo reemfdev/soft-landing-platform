@@ -154,7 +154,7 @@ const handleVerificationSubmit = async () => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(
-      'http://localhost:3000/auth/change-password',
+      'http://https://soft-landing-platform-production-0e16.up.railway.app//auth/change-password',
       {
         method: 'PUT',
 

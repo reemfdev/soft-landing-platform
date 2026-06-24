@@ -30,7 +30,7 @@ const fetchRequests = async () => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(
-      'http://localhost:3000/employee/requests',
+      'http://https://soft-landing-platform-production-0e16.up.railway.app//employee/requests',
       {
         headers: {
           Authorization: `Bearer ${token}`

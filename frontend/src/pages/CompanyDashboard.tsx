@@ -45,7 +45,7 @@ const [showApprovedPopup, setShowApprovedPopup] =
           user?.company_id;
 const companyResponse =
   await axios.get(
-    `http://localhost:3000/companies/${companyId}`,
+    `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/${companyId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`
@@ -63,7 +63,7 @@ if (
         // stages
         const stagesResponse =
           await axios.get(
-            `http://localhost:3000/companies/${companyId}/stages`,
+            `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/${companyId}/stages`,
             {
               headers: {
                 Authorization:
@@ -81,7 +81,7 @@ if (
         // tasks
         const tasksResponse =
           await axios.get(
-            `http://localhost:3000/companies/${companyId}/tasks`,
+            `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/${companyId}/tasks`,
             {
               headers: {
                 Authorization:
@@ -103,7 +103,7 @@ console.log(
         // progress
 const progressResponse =
   await axios.get(
-    `http://localhost:3000/companies/${companyId}/progress`,
+    `http://https://soft-landing-platform-production-0e16.up.railway.app//companies/${companyId}/progress`,
     {
       headers: {
         Authorization:

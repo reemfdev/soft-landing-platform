@@ -127,7 +127,7 @@ const fetchUsers = async () => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(
-      'http://localhost:3000/auth/users',
+      'http://https://soft-landing-platform-production-0e16.up.railway.app//auth/users',
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -170,7 +170,7 @@ const fetchCompanies = async () => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(
-      'http://localhost:3000/auth/companies',
+      'http://https://soft-landing-platform-production-0e16.up.railway.app//auth/companies',
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -204,7 +204,7 @@ const toggleStatus = async (
         : 'ACTIVE';
 
     const response = await fetch(
-      `http://localhost:3000/auth/users/${id}/status`,
+      `http://https://soft-landing-platform-production-0e16.up.railway.app//auth/users/${id}/status`,
       {
         method: 'PUT',
         headers: {
@@ -332,7 +332,7 @@ const toggleStatus = async (
         }
 
         const response = await fetch(
-          `http://localhost:3000/auth/users/${selectedUserId}`,
+          `http://https://soft-landing-platform-production-0e16.up.railway.app//auth/users/${selectedUserId}`,
           {
             method: 'PUT',
             headers: {
@@ -380,7 +380,7 @@ let backendRole = 'ADMIN';
 
       if (backendRole === 'ADMIN') {
         const response = await fetch(
-          'http://localhost:3000/auth/create-admin',
+          'http://https://soft-landing-platform-production-0e16.up.railway.app//auth/create-admin',
           {
             method: 'POST',
             headers: {
@@ -422,7 +422,7 @@ let backendRole = 'ADMIN';
     const token = localStorage.getItem('token');
 
     await fetch(
-      `http://localhost:3000/auth/users/${id}`,
+      `http://https://soft-landing-platform-production-0e16.up.railway.app//auth/users/${id}`,
       {
         method: 'DELETE',
 

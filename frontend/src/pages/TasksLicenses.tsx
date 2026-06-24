@@ -85,9 +85,9 @@ const [newDocument, setNewDocument] =
 
       const [tasksRes, stagesRes, sectorsRes] =
         await Promise.all([
-          fetch('http://localhost:3000/tasks'),
-          fetch('http://localhost:3000/stages'),
-          fetch('http://localhost:3000/sectors')
+          fetch('http://https://soft-landing-platform-production-0e16.up.railway.app//tasks'),
+          fetch('http://https://soft-landing-platform-production-0e16.up.railway.app//stages'),
+          fetch('http://https://soft-landing-platform-production-0e16.up.railway.app//sectors')
         ]);
 
       const tasksData = await tasksRes.json();
@@ -119,7 +119,7 @@ const [newDocument, setNewDocument] =
     try {
 
       await fetch(
-        `http://localhost:3000/tasks/${id}`,
+        `http://https://soft-landing-platform-production-0e16.up.railway.app//tasks/${id}`,
         {
           method: 'DELETE'
         }
@@ -215,7 +215,7 @@ const payload = {
     if (editingTask) {
 
       await fetch(
-        `http://localhost:3000/tasks/${editingTask.id}`,
+        `http://https://soft-landing-platform-production-0e16.up.railway.app//tasks/${editingTask.id}`,
         {
           method: 'PUT',
           headers: {
@@ -232,7 +232,7 @@ setTimeout(() => {
     } else {
 
       await fetch(
-        'http://localhost:3000/tasks',
+        'http://https://soft-landing-platform-production-0e16.up.railway.app//tasks',
         {
           method: 'POST',
           headers: {

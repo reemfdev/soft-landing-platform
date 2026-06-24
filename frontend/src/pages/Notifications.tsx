@@ -73,7 +73,7 @@ const fetchNotifications = async () => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://localhost:3000/companies/notifications",
+      "http://https://soft-landing-platform-production-0e16.up.railway.app//companies/notifications",
       {
         headers: {
           Authorization: `Bearer ${token}`

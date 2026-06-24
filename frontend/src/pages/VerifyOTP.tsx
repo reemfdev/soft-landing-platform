@@ -97,7 +97,7 @@ const endpoint =
 isReset
 ?
 
-"http://localhost:3000/auth/reset-password"
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/reset-password"
 
 :
 
@@ -105,11 +105,11 @@ isLogin
 
 ?
 
-"http://localhost:3000/auth/verify-login-otp"
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/verify-login-otp"
 
 :
 
-"http://localhost:3000/auth/verify-register-otp";
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/verify-register-otp";
 const res =
 await fetch(
 endpoint,
@@ -300,7 +300,7 @@ isReset
 
 ?
 
-"http://localhost:3000/auth/forgot-password"
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/forgot-password"
 
 :
 
@@ -308,11 +308,11 @@ isLogin
 
 ?
 
-"http://localhost:3000/auth/login"
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/login"
 
 :
 
-"http://localhost:3000/auth/register-with-company";
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/register-with-company";
 const body =
 
 isReset

@@ -39,7 +39,7 @@ try {
 
 const res =
 await fetch(
-"http://localhost:3000/auth/login",
+"http://https://soft-landing-platform-production-0e16.up.railway.app//auth/login",
 {
 
 method:
@@ -291,7 +291,7 @@ return;
  // إنشاء حساب
 try {
 
-  const res = await fetch('http://localhost:3000/auth/register-with-company', {
+  const res = await fetch('http://https://soft-landing-platform-production-0e16.up.railway.app//auth/register-with-company', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

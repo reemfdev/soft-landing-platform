@@ -279,7 +279,7 @@ console.log("BODY =", req.body);
         const file = req.files[index];
 
         const fileUrl =
-          `http://localhost:3000/uploads/${file.filename}`;
+          `http://https://soft-landing-platform-production-0e16.up.railway.app//uploads/${file.filename}`;
 
         const documentName =
           documentNames[index] || null;
