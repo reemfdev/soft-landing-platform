@@ -2,15 +2,6 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 
-// ← أضف هذا السطر هنا
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
-
-app.use(express.json());
-app.use(cors());
-
 app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
