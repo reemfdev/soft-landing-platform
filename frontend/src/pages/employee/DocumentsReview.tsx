@@ -8,7 +8,7 @@ import {
   CheckCircle, XCircle, RefreshCw, X, FileText
 } from 'lucide-react';
 
-const API = 'https://soft-landing-platform-production-0e16.up.railway.app/';
+const API = 'https://soft-landing-platform-production-0e16.up.railway.app';
 type TabKey = 'all' | 'PENDING' | 'APPROVED' | 'REJECTED' | 'NEEDS_RESUBMISSION';
 type ConfirmType = { type: 'reject' | 'resubmit'; docId: number } | null;
 

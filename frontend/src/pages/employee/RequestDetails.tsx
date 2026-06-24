@@ -9,7 +9,7 @@ import {
   Clock, User, MessageSquare, History, X
 } from 'lucide-react';
 
-const API = 'https://soft-landing-platform-production-0e16.up.railway.app/';
+const API = 'https://soft-landing-platform-production-0e16.up.railway.app';
 
 type ActionType =
   | "approve"

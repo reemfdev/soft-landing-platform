@@ -1317,7 +1317,7 @@ router.post(
       });
     }
 
-    const fileUrl = `https://soft-landing-platform-production-0e16.up.railway.app//uploads/${req.file.filename}`;
+    const fileUrl = `https://soft-landing-platform-production-0e16.up.railway.app/uploads/${req.file.filename}`;
 
     try {
 

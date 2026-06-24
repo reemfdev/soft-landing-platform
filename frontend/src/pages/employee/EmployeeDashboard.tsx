@@ -9,7 +9,7 @@ import {
   AlertCircle, Activity, RefreshCw, Download
 } from 'lucide-react';
 
-const API = 'https://soft-landing-platform-production-0e16.up.railway.app/';
+const API = 'https://soft-landing-platform-production-0e16.up.railway.app';
 
 export default function EmployeeDashboard() {
   const navigate = useNavigate();

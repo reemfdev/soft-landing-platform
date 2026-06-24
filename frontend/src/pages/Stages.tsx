@@ -41,7 +41,7 @@ const [errors, setErrors] = useState<{
   const [deleteStage, setDeleteStage] = useState<Stage | null>(null);
 
 useEffect(() => {
-  fetch('https://soft-landing-platform-production-0e16.up.railway.app//stages')
+  fetch('https://soft-landing-platform-production-0e16.up.railway.app/stages')
     .then((res) => res.json())
     .then((data) => {
 
@@ -123,7 +123,7 @@ if (!formData.description_ar.trim()) {
 
 if (selectedStage) {
 
-  fetch(`https://soft-landing-platform-production-0e16.up.railway.app//stages/${selectedStage.id}`, {
+  fetch(`https://soft-landing-platform-production-0e16.up.railway.app/stages/${selectedStage.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ body: JSON.stringify({
 
   console.log('PUT RESPONSE', data);
 
-  return fetch('https://soft-landing-platform-production-0e16.up.railway.app//stages');
+  return fetch('https://soft-landing-platform-production-0e16.up.railway.app/stages');
 
 })
 .then((res) => res.json())
@@ -178,7 +178,7 @@ const mappedStages = data.stages.map((stage: any) => ({
 });
 
 } else {
-    fetch('https://soft-landing-platform-production-0e16.up.railway.app//stages', {
+    fetch('https://soft-landing-platform-production-0e16.up.railway.app/stages', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -205,7 +205,7 @@ body: JSON.stringify({
     throw new Error(data.message);
   }
 
-  return fetch('https://soft-landing-platform-production-0e16.up.railway.app//stages');
+  return fetch('https://soft-landing-platform-production-0e16.up.railway.app/stages');
 
 })
   .then((res) => res.json())
@@ -232,7 +232,7 @@ const mappedStages = data.stages.map((stage: any) => ({
 
 const handleDelete = (id: string) => {
 
-  fetch(`https://soft-landing-platform-production-0e16.up.railway.app//stages/${id}`, {
+  fetch(`https://soft-landing-platform-production-0e16.up.railway.app/stages/${id}`, {
     method: 'DELETE'
   })
    .then((res) => res.json())
@@ -248,7 +248,7 @@ setTimeout(() => {
 
 throw new Error(data.message);  }
 
-  return fetch('https://soft-landing-platform-production-0e16.up.railway.app//stages');
+  return fetch('https://soft-landing-platform-production-0e16.up.railway.app/stages');
 
 })
     .then((res) => res.json())
@@ -321,7 +321,7 @@ onReorder={(newOrder) => {
 
   setStages(newOrder);
 
-  fetch('https://soft-landing-platform-production-0e16.up.railway.app//stages/reorder', {
+  fetch('https://soft-landing-platform-production-0e16.up.railway.app/stages/reorder', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
