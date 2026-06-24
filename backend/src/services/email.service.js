@@ -5,7 +5,7 @@ async function sendOTP(email, otp) {
   try {
     const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev', // أو دومينك إذا عندك
-      to: email,
+      to: 'ziyad.gmd@gmail.com',
       subject: 'OTP Verification',
       html: `
         <div style="font-family: Arial; padding: 20px;">
