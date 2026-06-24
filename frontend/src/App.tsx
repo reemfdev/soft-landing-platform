@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import VerifyOTP from "./pages/VerifyOTP";
 
-
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import NewPassword from "./pages/NewPassword";
@@ -40,72 +39,48 @@ import { Layout } from './components/Layout'
 function AppContent() {
 
   const { i18n } = useTranslation();
-
   const location = useLocation();
 
- const hideNavbar =
-  location.pathname === "/login" ||
-  location.pathname === "/company-dashboard" ||
-  location.pathname === "/company-profile" ||
-  location.pathname === "/company-notifications" || 
-  location.pathname === "/company-licenses" ||      
-  location.pathname.includes("/company-task") ||
-  location.pathname.startsWith("/employee") ||
-  location.pathname.startsWith("/admin");
+  const hideNavbar =
+    location.pathname === "/login" ||
+    location.pathname === "/company-dashboard" ||
+    location.pathname === "/company-profile" ||
+    location.pathname === "/company-notifications" ||
+    location.pathname === "/company-licenses" ||
+    location.pathname.includes("/company-task") ||
+    location.pathname.startsWith("/employee") ||
+    location.pathname.startsWith("/admin");
 
-const currentLanguage =
-  (i18n.language || "en").startsWith("ar") ? "ar" : "en";
+  const currentLanguage =
+    (i18n.language || "en").startsWith("ar") ? "ar" : "en";
 
   React.useEffect(() => {
-
     const html = document.documentElement;
-
     html.lang = currentLanguage;
-
-    html.dir =
-      currentLanguage === 'ar'
-        ? 'rtl'
-        : 'ltr';
-
+    html.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
   }, [currentLanguage]);
 
   return (
-
     <div
       dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen bg-brand-cream selection:bg-brand-gold selection:text-brand-navy"
     >
-
       {/* Navbar */}
       {!hideNavbar && <Navbar />}
 
       {/* Pages */}
       <main className="overflow-x-hidden">
-
         <Routes>
-<Route
-path="/verify-otp"
-element={<VerifyOTP />}
-/>
-<Route
-path="/new-password"
-element={<NewPassword />}
-/>
+          <Route path="/verify-otp" element={<VerifyOTP />} />
+          <Route path="/new-password" element={<NewPassword />} />
+
           {/* Home */}
-          <Route
-            path="/"
-            element={<HomePage />}
-          />
+          <Route path="/" element={<HomePage />} />
 
           {/* Login */}
-          <Route
-            path="/login"
-            element={<LoginPage />}
-          />
-<Route
-path="/forgot-password"
-element={<ForgotPassword />}
-/>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+
           {/* Dashboard */}
           <Route
             path="/company-dashboard"
@@ -126,23 +101,23 @@ element={<ForgotPassword />}
             }
           />
 
-<Route
-  path="/company-licenses"
-  element={
-    <ProtectedRoute allowedRole="CLIENT">
-      <CompanyLicenses />
-    </ProtectedRoute>
-  }
-/>
+          <Route
+            path="/company-licenses"
+            element={
+              <ProtectedRoute allowedRole="CLIENT">
+                <CompanyLicenses />
+              </ProtectedRoute>
+            }
+          />
 
-<Route
-  path="/company-notifications"
-  element={
-    <ProtectedRoute allowedRole="CLIENT">
-      <CompanyNotifications />
-    </ProtectedRoute>
-  }
-/>
+          <Route
+            path="/company-notifications"
+            element={
+              <ProtectedRoute allowedRole="CLIENT">
+                <CompanyNotifications />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Task Details */}
           <Route
@@ -196,54 +171,48 @@ element={<ForgotPassword />}
             }
           />
 
-            {/* ── ADMIN DASHBOARD ─── */}
-<Route path="/admin" element={<Layout />}>
-  <Route index element={<Dashboard />} />
-  <Route path="users" element={<Users />} />
-  <Route path="companies" element={<Companies />} />
-  <Route path="requests" element={<Requests />} />
-
-  <Route
-    path="requests/:id"
-    element={<RequestDetails />}
-  />
-
-  <Route path="stages" element={<Stages />} />
-<Route path="tasks-licenses" element={<TasksLicenses />} />
-  <Route path="notifications" element={<Notifications />} />
-  <Route path="settings" element={<Settings />} />
-</Route>
+          {/* ── ADMIN DASHBOARD ─── ← التعديل هنا */}
+          <Route path="/admin" element={
+            <ProtectedRoute allowedRole="ADMIN">
+              <Layout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="companies" element={<Companies />} />
+            <Route path="requests" element={<Requests />} />
+            <Route path="requests/:id" element={<RequestDetails />} />
+            <Route path="stages" element={<Stages />} />
+            <Route path="tasks-licenses" element={<TasksLicenses />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
 
         </Routes>
-
       </main>
 
       {/* Footer */}
-{
-  location.pathname !== "/login" &&
-  location.pathname !== "/company-dashboard" &&
-  location.pathname !== "/company-profile" &&
-  location.pathname !== "/company-notifications" &&
-  location.pathname !== "/company-licenses" &&
-  !location.pathname.includes("/company-task") &&
-  !location.pathname.startsWith("/employee") &&
-  !location.pathname.startsWith("/admin") &&
-  <Footer />
-}
-
+      {
+        location.pathname !== "/login" &&
+        location.pathname !== "/company-dashboard" &&
+        location.pathname !== "/company-profile" &&
+        location.pathname !== "/company-notifications" &&
+        location.pathname !== "/company-licenses" &&
+        !location.pathname.includes("/company-task") &&
+        !location.pathname.startsWith("/employee") &&
+        !location.pathname.startsWith("/admin") &&
+        <Footer />
+      }
     </div>
-
   );
 }
 
 export function App() {
-
   return (
     <AppProvider>
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
     </AppProvider>
   );
-
 }
